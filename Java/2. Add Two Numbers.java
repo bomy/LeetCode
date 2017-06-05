@@ -14,7 +14,7 @@ public class Solution {
         ListNode resultList = new ListNode(0) ;
         ListNode targetList = resultList;
 
-        while(l1 != null || l2 !=null  )
+        while(l1 != null || l2 !=null ||  carry>0)
         {
             int l1value = 0;
             int l2value = 0;
@@ -37,14 +37,6 @@ public class Solution {
             targetList = targetList.next ;
 
         }
-
-         while(carry >0  )
-        {
-            targetList.next = new ListNode(carry % 10);
-            carry = carry/10;
-            targetList = targetList.next ;
-        }
-
         return resultList.next;
     }
 }
