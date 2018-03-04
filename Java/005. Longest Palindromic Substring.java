@@ -1,51 +1,66 @@
 public class Solution {
-    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-        int m = num1.length;
-        int n = num2.length;
-        double result  ;
-        if((m + n) % 2 == 1)
+    public String longestPalindrome(String s) {
+        char[] longString = s.toCharArray();
+        int strLength = longString.length;
+        String temp = "";
+   
+        if(longString.length<2)
         {
-            result = findMidValue( num1, 0, m-1, num2, 0, n-1, (m + n) / 2);
+            return s;
         }
-        else
-        {
-            result = findMidValue( num1, 0, m-1, num2, 0, n-1, (m + n - 1) / 2)
-                    + findMidValue( num1, 0, m-1, num2, 0, n-1, (m + n + 1) / 2);
+        
+        String answer = ""+longString[0];
+        
+        for(int i=0; i<strLength; i++)
+        { 
+            temp = temp + longString[i];
+            int tempLength = temp.length() ;
+            if(tempLength >= 2)
+            {
+                String Check = CheckAfterString(temp, longString, i, answer);
+                if(Check.length() > answer.length())
+                {
+                    answer = Check;
+                }
+                temp = temp.substring(1, tempLength ); 
+            } 
         }
-
-
-
-        return result;
+        
+        return answer;
     }
-
-    public double findMidValue(int[] num1,int mStart, int mEnd, int[] num2, int nStart, int nEnd, int k)
+    
+    public String CheckAfterString(String temp, char[] longString, int i, String answer)
     {
-        int i = ( mStart+mEnd) / 2;
-        int j = ( nStart+nEnd) / 2;
-
-        if()
-
-        if(num1[i] < num2[j])
+        String result = "";
+        String checktemp = temp;
+        for(int j=i; j< longString.length; j++)
         {
-            if(k =<i + j )
-            {
-                 findMidValue( num1, mStart, mEnd, num2, nStart, j,  k);
+            if (j> i) {
+                checktemp = checktemp + longString[j ];
             }
-            else
+       
+            if( CheckPalindromic(checktemp) )
             {
-                findMidValue( num1, i, mEnd,  num2,  nStart, nEnd,  k);
+                result = checktemp;
             }
         }
-        else
+
+        return result; 
+    }
+    
+    public boolean CheckPalindromic(String temp)
+    {
+        char[] tempChar = temp.toCharArray();
+        int tempLength = temp.length() ;
+
+        for(int j=0; j<tempLength/2; j++)
         {
-             if(k >=i + j )
+            if(tempChar[j] != tempChar[tempLength -j -1] )
             {
-                 findMidValue( num1, mStart, mEnd,  num2,  j, nEnd,  k);
-            }
-            else
-            {
-                findMidValue( num1, mStart, i,  num2,  nStart, nEnd,  k);
+                return false;
             }
         }
+
+        return  true;
     }
 }
