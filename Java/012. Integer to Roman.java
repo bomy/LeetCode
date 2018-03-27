@@ -11,7 +11,7 @@ class Solution {
             int x = num/value[j];
             for(int i =0 ; i<x; i++)
             {
-                ans = ans + roman[j] ;
+                ans = ans + roman[j] ; 
             }
             num = num % value[j];
          }    
