@@ -10,7 +10,7 @@ class Solution {
             if(haystack.substring(i, i + needle.length()).equals(needle)) 
                 return i;
         }
-        
+         
         return -1; 
     }
 }
