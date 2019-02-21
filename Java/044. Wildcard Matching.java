@@ -1,31 +1,39 @@
 class Solution {
-    public String multiply(String num1, String num2) {
-		if(num1 == null || num2==null )
-			return "0";
+    public boolean isMatch(String s, String p) {
+        int sp = 0;
+		int pp = 0;
+		int match = 0;
+		int star = -1;
 		
-		int[] digits = new int[num1.length() + num2.length()];
-		for( int i = num1.length()-1; i>=0; i--)
+		while(sp < s.length())
 		{
-			for(int j = num2.length()-1; j>=0; j--)
+			if(pp < p.length() && (s.charAt(sp) == p.charAt(pp) || p.charAt(pp) == '?'))
 			{
-				int product = (num1.charAt(i)-'0') * (num2.charAt(j)-'0');
-				int p1 = i + j, p2= i + j + 1;
-				int sum = product + digits[p2];
-				digits[p1] += sum / 10;
-				digits[p2] = sum % 10;
+				sp++;
+				pp++;
+			} 
+			else if( pp< p.length() && p.charAt(pp) == '*' )
+			{
+				//"bbaac"
+				//*c
+				star = pp;
+				match = sp;
+				pp++;
 			}
+			else if(star != -1)
+			{
+				pp = star +1;
+				match++;
+				sp= match;
+			}else 
+				return false;
 		}
 		
-		StringBuilder res = new StringBuilder();
-		for(int digit : digits)
+		while(pp < p.length() && p.charAt(pp) =='*')
 		{
-			if(!(digit ==0 && res.length() == 0))
-			{
-				res.append(digit);
-			}
+			pp++;
 		}
 		
-		return res.length() == 0 ? "0": res.toString();
+		return pp == p.length();
     }
 }
-
