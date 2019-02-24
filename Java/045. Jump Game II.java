@@ -16,11 +16,13 @@ class Solution {
 				if(maxNext > nums.length-1)
 				{
 					return level;
-				}			
+				}	
+				
+				curMaxArea = maxNext;ss
 			}			
 		}
 		
-		return res;
+		return 0;
     }
 	
 	public int jump2(int[] nums) {
