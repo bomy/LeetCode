@@ -18,7 +18,7 @@ class Solution {
 					return level;
 				}	
 				
-				curMaxArea = maxNext;ss
+				curMaxArea = maxNext;
 			}			
 		}
 		
